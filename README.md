@@ -1,5 +1,5 @@
 # My brand
-### Java spring version for my brand portfolio. 
+### Spring version for my brand portfolio. 
 This project uses Java 8 and maven as package manager.<br/>
 ## Other versions: 
 <b>Nodejs Version:</b> https://github.com/alainmucyo/andelabrand/tree/develop/server <br/>

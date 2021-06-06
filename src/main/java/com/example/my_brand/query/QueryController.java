@@ -1,8 +1,10 @@
 package com.example.my_brand.query;
 
+import com.example.my_brand.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,10 @@ public class QueryController {
 
     @GetMapping("/queries")
     public List<Query> index() {
+
+        // Getting current logged in user
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(userDetails.getEmail());
         return queryRepository.findAll();
     }
 
