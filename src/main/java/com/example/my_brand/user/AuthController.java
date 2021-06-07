@@ -13,12 +13,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Date;
 
 @RestController
+@RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
     private UserRepository userRepository;
@@ -29,7 +31,7 @@ public class AuthController {
     @Autowired
     PasswordEncoder encoder;
 
-    @PostMapping("/auth/login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -38,7 +40,7 @@ public class AuthController {
         return ResponseEntity.ok(new LoginResponse("Login Success", token, new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)));
     }
 
-    @PostMapping("/auth/signup")
+    @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody AuthRequest signUpRequest) {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity

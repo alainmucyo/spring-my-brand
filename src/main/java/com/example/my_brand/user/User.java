@@ -1,6 +1,8 @@
 package com.example.my_brand.user;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
